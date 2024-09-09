@@ -12,12 +12,36 @@ export  const  Registration=async (req,res)=>{
        return res.status(201).json({
            status:"fail",message:e.toString()
        })
-
-}
+    }
 }
 export  const  Login=async (req,res)=>{
-    return res.json({status:"success"})
 
+    try{
+        let reqBody=req.body;
+      let data=  await  UsersModel.findOne(reqBody)
+
+
+       if (data ===null){
+            res.json({
+                status:"fail",
+                message:"User Not Found"
+            })
+       }else {
+           return res.status(201).json({
+               status:"Success",
+               message:"User Login Successfully",
+               data:data
+           })
+       }
+
+
+
+    }
+    catch (e) {
+        return res.status(201).json({
+            status:"fail",message:e.toString()
+        })
+    }
 }
 
 export  const  ProfileDetails=async (req,res)=>{
