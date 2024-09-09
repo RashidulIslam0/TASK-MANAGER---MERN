@@ -80,46 +80,42 @@ export const ProfileUpdate = async (req, res) => {
     }
 };
 
-export  const  EmailVerify=async (req,res)=>{
-   try{
-       let email=req.params.email
-       let data =await  usersModel.findOne({email: email})
-       if (data == null){
-           return res.status(404).json({
-               status: "fail",
-               message: "User Email does not exits ",
 
-           });
-       }else {
-           // Send OTP TO Email
-           let code=Math.floor(100000+ Math.random()*900000)
-           let EmailTo=data['email'];
-           let EmailText="Your Code Is " + code
-           let EmailSubject="Task Manager Verification Code"
-           await  SendEmail(
-               EmailTo,
-               EmailSubject,
-               EmailText
-           )
-           // Update Otp In User
-           await  usersModel.findOne({email: email},{otp:code})
-           return   res.json({
-               status: "Success",
-               message: "Verify OTP Successfully",
-           })
 
-       }
-   }catch (e) {
-       return res.status(500).json({
-           status: "fail",
-           message: e.toString()
-       });
-   }
+
+
+
+
+export const EmailVerify=async(req,res)=>{
+    try {
+        let email=req.params.email;
+        let data=await UsersModel.findOne({email: email})
+        if(data==null){
+            return res.json({status:"fail","Message":"User email does not exist"})
+        }
+        else {
+
+            // Send OTP To Email
+            let code=Math.floor(100000+Math.random()*900000)
+            let EmailTo= data['email'];
+            let EmailText= "Your Code is "+ code;
+            let EmailSubject= "Task Manager Verification Code"
+            await SendEmail(EmailTo, EmailText, EmailSubject)
+
+            // Update OTP In User
+            await UsersModel.updateOne({email: email},{otp:code})
+            return res.json({status:"success",Message:"Verification successfully,check email"})
+
+        }
+    }
+    catch (e){
+        return res.json({status:"fail","Message":e.toString()})
+    }
 }
+export  const  CodeVerify=async (req,res)=>{
+    return res.json({status:"success"})
 
-
-
-
+}
 
 
 export  const  ResetPassWord=async (req,res)=>{
