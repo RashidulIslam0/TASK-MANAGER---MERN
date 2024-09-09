@@ -5,7 +5,7 @@ export  const REQUEST_LIMIT_TIME=15*60*1000
 export  const REQUEST_LIMIT_NUMBER=30000
 
 export const JWT_KEY="ABCABAc101010"
-export  const JWT_EXPIRE_TIME="30*24*60*60"
+export const JWT_EXPIRE_TIME = "30d";
 
 export const EMAIL_HOST="mail.teamrabbil.com"
 export const EMAIL_PORT=25
