@@ -18,6 +18,7 @@ import {
     WEB_CACHE
 
 } from "./app/config/config.js";
+import bodyParser from "body-parser";
 const app=express()
 
 // security Apply
@@ -25,6 +26,7 @@ app.use(cors())
 app.use(helmet())
 app.use(hpp())
 app.use(cookieParser())
+app.use(bodyParser.json())
 
 // request size Limited
 app.use(express.json({Limit: MAX_JSON_SIZE}))

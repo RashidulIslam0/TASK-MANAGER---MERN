@@ -16,4 +16,4 @@ export const EMAIL_UN_AUTH=false
 
 export  const WEB_CACHE =false
 
-export const MONGODB_CUNNECTION="mongodb://localhost:27017/Task-Manager-API"
+export const MONGODB_CUNNECTION="mongodb+srv://rashidul:rashidul123@cluster0.6hosu.mongodb.net/Task-Manager-API"
