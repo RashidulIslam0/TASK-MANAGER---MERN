@@ -1,6 +1,7 @@
 import UsersModel from "../models/UsersModel.js";
 import {TokenEncode} from "../utility/tokenUtility.js";
 import usersModel from "../models/UsersModel.js";
+import SendEmail from "../utility/emailUtility.js";
 
 export  const  Registration=async (req,res)=>{
    try{
@@ -80,14 +81,46 @@ export const ProfileUpdate = async (req, res) => {
 };
 
 export  const  EmailVerify=async (req,res)=>{
-    return res.json({status:"success"})
+   try{
+       let email=req.params.email
+       let data =await  usersModel.findOne({email: email})
+       if (data == null){
+           return res.status(404).json({
+               status: "fail",
+               message: "User Email does not exits ",
 
+           });
+       }else {
+           // Send OTP TO Email
+           let code=Math.floor(100000+ Math.random()*900000)
+           let EmailTo=data['email'];
+           let EmailText="Your Code Is " + code
+           let EmailSubject="Task Manager Verification Code"
+           await  SendEmail(
+               EmailTo,
+               EmailSubject,
+               EmailText
+           )
+           // Update Otp In User
+           await  usersModel.findOne({email: email},{otp:code})
+           return   res.json({
+               status: "Success",
+               message: "Verify OTP Successfully",
+           })
+
+       }
+   }catch (e) {
+       return res.status(500).json({
+           status: "fail",
+           message: e.toString()
+       });
+   }
 }
 
-export  const  CodeVerify=async (req,res)=>{
-    return res.json({status:"success"})
 
-}
+
+
+
 
 export  const  ResetPassWord=async (req,res)=>{
     return res.json({status:"success"})

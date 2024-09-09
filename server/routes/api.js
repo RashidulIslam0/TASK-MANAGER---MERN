@@ -12,7 +12,7 @@ router.get("/ProfileDetails",AuthMiddleware,UserController.ProfileDetails)
 router.post("/ProfileUpdate",AuthMiddleware,UserController.ProfileUpdate)
 
 router.post("/CodeVerify",UserController.CodeVerify)
-router.post("/EmailVerify",UserController.EmailVerify)
+router.post("/EmailVerify/:email",UserController.EmailVerify)
 router.post("/ResetPassWord",UserController.ResetPassWord)
 
 
