@@ -1,5 +1,6 @@
 import UsersModel from "../models/UsersModel.js";
 import {TokenEncode} from "../utility/tokenUtility.js";
+import usersModel from "../models/UsersModel.js";
 
 export  const  Registration=async (req,res)=>{
    try{
@@ -10,7 +11,7 @@ export  const  Registration=async (req,res)=>{
        })
    }
    catch (e) {
-       return res.status(201).json({
+       return res.status(500).json({
            status:"fail",message:e.toString()
        })
     }
@@ -42,8 +43,21 @@ export  const  Login=async (req,res)=>{
 }
 
 export  const  ProfileDetails=async (req,res)=>{
-    return res.json({status:"success"})
+  try{
+      let user_id=req.headers['user_id']
+      let data =await usersModel.findOne({_id:user_id})
+      return res.status(201).json({
+          status:"Success",
+          message:"User Profile Successfully",
+          data: data
 
+      })
+  }
+  catch (e) {
+      return res.status(500).json({
+          status:"fail",message:e.toString()
+      })
+  }
 }
 
 export  const  ProfileUpdate=async (req,res)=>{
