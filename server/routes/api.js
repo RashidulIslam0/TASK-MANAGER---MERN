@@ -7,7 +7,7 @@ import * as UserController from "../app/controllers/UserController.js";
 // USERS
 router.post("/Registration",UserController.Registration)
 router.post("/Login",UserController.Login)
-router.get("/ProfileDetails",UserController.ProfileDetails)
+router.get("/ProfileDetails",AbortController,UserController.ProfileDetails)
 router.post("/CodeVerify",UserController.CodeVerify)
 router.post("/ProfileUpdate",UserController.ProfileUpdate)
 router.post("/EmailVerify",UserController.EmailVerify)
