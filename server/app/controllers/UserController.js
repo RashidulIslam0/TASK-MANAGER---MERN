@@ -112,10 +112,24 @@ export const EmailVerify=async(req,res)=>{
         return res.json({status:"fail","Message":e.toString()})
     }
 }
-export  const  CodeVerify=async (req,res)=>{
-    return res.json({status:"success"})
 
+
+export  const  CodeVerify=async (req,res)=>{
+  try{
+      let reqBody=req.body
+      let data=await UsersModel.findOne({email:reqBody['email'],otp:reqBody['otp']})
+
+      if(data== null){
+
+          return res.json({status:"fail",message:"Wrong Verification Code"})
+      }else {
+          return res.json({status:"success",message:" Verification successfully"})}
+  }catch (e) {
+      return res.json({status:"fail","Message":e.toString()})
+  }
 }
+
+
 
 
 export  const  ResetPassWord=async (req,res)=>{
