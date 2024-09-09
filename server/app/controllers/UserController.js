@@ -60,10 +60,24 @@ export  const  ProfileDetails=async (req,res)=>{
   }
 }
 
-export  const  ProfileUpdate=async (req,res)=>{
-    return res.json({status:"success"})
+export const ProfileUpdate = async (req, res) => {
+    try {
+        let reqBody = req.body;
+        let user_id = req.headers['user_id'];
+        let data = await UsersModel.updateOne({ "_id": user_id }, reqBody);
 
-}
+        return res.status(201).json({
+            status: "Success",
+            message: "User Updated Successfully",
+            data: data
+        });
+    } catch (e) {
+        return res.status(500).json({
+            status: "fail",
+            message: e.toString()
+        });
+    }
+};
 
 export  const  EmailVerify=async (req,res)=>{
     return res.json({status:"success"})

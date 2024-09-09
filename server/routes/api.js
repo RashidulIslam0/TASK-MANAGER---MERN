@@ -9,8 +9,9 @@ import AuthMiddleware from "../app/middlewares/AuthMiddleware.js";
 router.post("/Registration",UserController.Registration)
 router.post("/Login",UserController.Login)
 router.get("/ProfileDetails",AuthMiddleware,UserController.ProfileDetails)
+router.post("/ProfileUpdate",AuthMiddleware,UserController.ProfileUpdate)
+
 router.post("/CodeVerify",UserController.CodeVerify)
-router.post("/ProfileUpdate",UserController.ProfileUpdate)
 router.post("/EmailVerify",UserController.EmailVerify)
 router.post("/ResetPassWord",UserController.ResetPassWord)
 
