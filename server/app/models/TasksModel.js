@@ -1,4 +1,4 @@
-import mongoose, {Mongoose} from "mongoose";
+import mongoose from "mongoose";
 const TaskSchema= new mongoose.Schema({
         title:{
             type:String,
@@ -15,23 +15,12 @@ const TaskSchema= new mongoose.Schema({
         status:{
             type:String,
             required:true,
-
-
         },
 
         user_id:{
-            type:Mongoose.Schema.Types.ObjectId,
+            type:mongoose.Schema.Types.ObjectId,
             required:true,
-
-
         },
-
-        password:{
-            type:String,
-            required:true,
-
-
-        }
 
     },
     {
