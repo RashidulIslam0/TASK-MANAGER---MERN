@@ -18,8 +18,8 @@ router.post("/ResetPassWord",UserController.ResetPassWord)
 
 // Task
 router.post("/CreatedTask",AuthMiddleware,TaskController.CreatedTask)
-router.get("/UpdateTaskStatus",AuthMiddleware,TaskController.UpdateTaskStatus)
-router.get("/TaskListByStatus",AuthMiddleware,TaskController.TaskListByStatus)
+router.get("/UpdateTaskStatus/:id/:status",AuthMiddleware,TaskController.UpdateTaskStatus)
+router.get("/TaskListByStatus/:status",AuthMiddleware,TaskController.TaskListByStatus)
 router.get("/DeleteTask",AuthMiddleware,TaskController.DeleteTask)
 router.get("/CountTask", AuthMiddleware,TaskController.CountTask)
 
