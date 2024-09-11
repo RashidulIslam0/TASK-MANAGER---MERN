@@ -131,11 +131,51 @@ export  const  CodeVerify=async (req,res)=>{
 
 
 
+//
+// export  const  ResetPassWord=async (req,res)=>{
+// try {
+//     let reqBody=req.body
+//     let data=await UsersModel.findOne({email:reqBody['email'],otp:reqBody['otp']})
+//
+//     if(data== null){
+//
+//         return res.json({status:"fail",message:"Wrong Verification Code"})
+//     }else {
+//         let data=await UsersModel.findOne({email:reqBody["email"]},
+//             {otp: "0", password: reqBody['password']}
+//             )
+//
+//         return res.json({status:"success",message:" Password reset successfully",data})}
+//
+//
+// }catch (e) {
+//     return res.json({status:"fail","Message":e.toString()})
+// }
+//
+// }
+//
 
-export  const  ResetPassWord=async (req,res)=>{
-    return res.json({status:"success"})
+
+export const ResetPassWord=async(req,res)=>{
+
+
+    try {
+        let reqBody=req.body;
+        let data=await UsersModel.findOne({email: reqBody['email'],otp:reqBody['otp']})
+        if(data==null){
+            return res.json({status:"fail","Message":"Wrong Verification Code"})
+        }
+        else {
+
+            await UsersModel.updateOne({email: reqBody['email']},{
+                otp:"0", password:reqBody['password'],
+            })
+            return res.json({status:"success",Message:"Password Reset successfully"})
+        }
+    }
+    catch (e){
+        return res.json({status:"fail","Message":e.toString()})
+    }
+
 
 }
-
-
-
