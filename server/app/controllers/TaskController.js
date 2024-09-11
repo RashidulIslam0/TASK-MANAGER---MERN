@@ -59,7 +59,21 @@ export  const TaskListByStatus=async (req,res)=>{
 
 
 export  const DeleteTask=async (req,res)=>{
-    return res.json({status:"success"})
+    try {
+
+        let id =req.params.id
+        let user_id=req.headers['user_id']
+        let date =await  tasksModel.deleteOne({"_id":id, "user_id":user_id },
+
+        )
+        return res.status(201).json({
+            status:"Success",
+            message:"User Delete Successfully ",
+            date:date
+        })
+    }catch (e) {
+        return res.json({status:"fail","Message":e.toString()})
+    }
 
 }
 
