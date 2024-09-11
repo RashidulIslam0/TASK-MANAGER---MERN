@@ -1,4 +1,5 @@
 import tasksModel from "../models/TasksModel.js";
+import mongoose from "mongoose";
 
 export  const CreatedTask=async (req,res)=>{
     try{
@@ -80,8 +81,24 @@ export  const DeleteTask=async (req,res)=>{
 
 
 export  const   CountTask=async (req,res)=>{
-    return res.json({status:"success"})
+    try {
+        let ObjectId =mongoose.Types.ObjectId
+        let user_id=new ObjectId(req.headers['user_id'])
+        let date =await  tasksModel.aggregate([
+            {$match:{user_id: user_id}},
+            {$group:{_id:"$status",sum:{$count:{}}}}
+        ])
+        return res.status(201).json({
+            status:"Success",
+            message:"User Count Successfully ",
+            date:date
+        })
+    }catch (e) {
+        return res.json({status:"fail","Message":e.toString()})
+    }
 
 }
+
+
 
 
