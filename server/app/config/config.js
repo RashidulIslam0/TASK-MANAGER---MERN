@@ -9,11 +9,11 @@ export const JWT_EXPIRE_TIME = "30d";
 
 export const EMAIL_HOST="mail.teamrabbil.com"
 export const EMAIL_PORT=25
-export const EMAIL_SECURITY=false
+export const EMAIL_SECURITY=true
 export const EMAIL_USER="info@teamrabbil.com"
 export const EMAIL_PASS="~sR4[bhaC[Qs"
 export const EMAIL_UN_AUTH=false
 
 export  const WEB_CACHE =false
 
-export const MONGODB_CUNNECTION="mongodb+srv://rashidul:rashidul123@cluster0.6hosu.mongodb.net/Task-Manager-API"
+export const MONGODB_CUNNECTION="mongodb+srv://rashidul:rashidul123@cluster0.6hosu.mongodb.net/Ecommerce-API"
